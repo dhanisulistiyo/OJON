@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title center style="text-align:center">OJON</ion-title>
+  </ion-navbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar [(ngModel)]="src" (ionInput)="updateSearchResultsSrc()" placeholder="Choose your place"></ion-searchbar>
+    <ion-searchbar [hidden]="src == ''" [(ngModel)]="des" (ionInput)="updateSearchResultsDes()" placeholder="Choose your destination"></ion-searchbar>
+    <button [hidden]="(des == '')" ion-button color="secondary" (click)="generate()" full>Generate</button>
+  </ion-toolbar>
+  <ion-list [hidden]="autocompleteItemsSrc.length == 0">
+    <ion-item *ngFor="let item of autocompleteItemsSrc" tappable (click)="selectSearchResultSrc(item)">
+      {{ item.description }}
+    </ion-item>
+  </ion-list>
+  <ion-list [hidden]="autocompleteItemsDes.length == 0">
+    <ion-item *ngFor="let item of autocompleteItemsDes" tappable (click)="selectSearchResultDes(item)">
+      {{ item.description }}
+    </ion-item>
+  </ion-list>
+</ion-header>
+
+<ion-content>
+  <!-- <ion-card>
+    <ion-card-content>
+      <div #directionsPanel></div>
+    </ion-card-content>
+  </ion-card> -->
+  <div #map id="map"></div>
+</ion-content>
